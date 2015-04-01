@@ -1,10 +1,12 @@
 <?php
+namespace GeoPHP\Adapter;
+
 /**
  * EWKT (Extended Well Known Text) Adapter
  */
 class EWKT extends WKT
 {
-  
+
   /**
    * Serialize geometries into an EWKT string.
    *

@@ -1,10 +1,12 @@
 <?php
+namespace GeoPHP\Adapter;
+
 /**
  * EWKB (Extended Well Known Binary) Adapter
  */
 class EWKB extends WKB
 {
-  
+
   /**
    * Read WKB binary string into geometry objects
    *
@@ -16,7 +18,7 @@ class EWKB extends WKB
     if ($is_hex_string) {
       $wkb = pack('H*',$wkb);
     }
-    
+
     // Open the wkb up in memory so we can examine the SRID
     $mem = fopen('php://memory', 'r+');
     fwrite($mem, $wkb);
@@ -29,19 +31,19 @@ class EWKB extends WKB
       $srid = NULL;
     }
     fclose($mem);
-    
+
     // Run the wkb through the normal WKB reader to get the geometry
     $wkb_reader = new WKB();
     $geom = $wkb_reader->read($wkb);
-    
+
     // If there is an SRID, add it to the geometry
     if ($srid) {
       $geom->setSRID($srid);
     }
-    
+
     return $geom;
   }
-  
+
   /**
    * Serialize geometries into an EWKB binary string.
    *
@@ -52,7 +54,7 @@ class EWKB extends WKB
   public function write(Geometry $geometry, $write_as_hex = FALSE) {
     // We always write into NDR (little endian)
     $wkb = pack('c',1);
-    
+
     switch ($geometry->getGeomType()) {
       case 'Point';
         $wkb .= pack('L',1);
@@ -83,7 +85,7 @@ class EWKB extends WKB
         $wkb .= $this->writeMulti($geometry);
         break;
     }
-    
+
     if ($write_as_hex) {
       $unpacked = unpack('H*',$wkb);
       return $unpacked[1];

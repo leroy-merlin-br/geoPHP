@@ -1,4 +1,6 @@
 <?php
+namespace GeoPHP\Adapter;
+
 /*
  * (c) Patrick Hayes
  *

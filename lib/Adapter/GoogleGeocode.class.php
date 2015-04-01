@@ -1,4 +1,6 @@
 <?php
+namespace GeoPHP\Adapter;
+
 /*
  * (c) Camptocamp <info@camptocamp.com>
  * (c) Patrick Hayes
@@ -31,7 +33,7 @@ class GoogleGeocode extends GeoAdapter
    */
   public function read($address, $return_type = 'point', $bounds = FALSE, $return_multiple = FALSE) {
     if (is_array($address)) $address = join(',', $address);
-    
+
     if (gettype($bounds) == 'object') {
       $bounds = $bounds->getBBox();
     }
@@ -41,13 +43,13 @@ class GoogleGeocode extends GeoAdapter
     else {
       $bounds_string = '';
     }
-    
+
     $url = "http://maps.googleapis.com/maps/api/geocode/json";
     $url .= '?address='. urlencode($address);
     $url .= $bounds_string;
     $url .= '&sensor=false';
     $this->result = json_decode(@file_get_contents($url));
-    
+
     if ($this->result->status == 'OK') {
       if ($return_multiple == FALSE) {
         if ($return_type == 'point') {
@@ -93,12 +95,12 @@ class GoogleGeocode extends GeoAdapter
     $centroid = $geometry->getCentroid();
     $lat = $centroid->getY();
     $lon = $centroid->getX();
-    
+
     $url = "http://maps.googleapis.com/maps/api/geocode/json";
     $url .= '?latlng='.$lat.','.$lon;
     $url .= '&sensor=false';
     $this->result = json_decode(@file_get_contents($url));
-    
+
     if ($this->result->status == 'OK') {
       if ($return_type == 'string') {
         return $this->result->results[0]->formatted_address;
@@ -113,7 +115,7 @@ class GoogleGeocode extends GeoAdapter
       return FALSE;
     }
   }
-  
+
   private function getPoint($delta = 0) {
     $lat = $this->result->results[$delta]->geometry->location->lat;
     $lon = $this->result->results[$delta]->geometry->location->lng;
@@ -143,7 +145,7 @@ class GoogleGeocode extends GeoAdapter
     $lon = $this->result->results[$delta]->geometry->bounds->northeast->lng;
     return new Point($lon, $lat);
   }
-  
+
   private function getBottomLeft($delta = 0) {
     $lat = $this->result->results[$delta]->geometry->bounds->southwest->lat;
     $lon = $this->result->results[$delta]->geometry->bounds->southwest->lng;

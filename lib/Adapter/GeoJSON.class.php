@@ -1,4 +1,6 @@
 <?php
+namespace GeoPHP\Adapter;
+
 /**
  * GeoJSON class : a geojson reader/writer.
  *

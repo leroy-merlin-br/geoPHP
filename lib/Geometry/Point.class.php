@@ -1,4 +1,5 @@
 <?php
+namespace GeoPHP\Geometry;
 
 /**
  * Point: The most basic geometry type. All other geometries
