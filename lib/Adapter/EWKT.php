@@ -1,6 +1,8 @@
 <?php
 namespace GeoPHP\Adapter;
 
+use GeoPHP\Geometry\Geometry;
+
 /**
  * EWKT (Extended Well Known Text) Adapter
  */

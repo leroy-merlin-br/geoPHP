@@ -1,6 +1,14 @@
 <?php
 namespace GeoPHP\Adapter;
 
+use Exception;
+use GeoPHP\Geometry\Geometry;
+use GeoPHP\Geometry\Polygon;
+use GeoPHP\Geometry\MultiPolygon;
+use GeoPHP\Geometry\Point;
+use GeoPHP\Geometry\LineString;
+use GeoPHP\Geometry\GeometryCollection;
+
 /*
  * (c) Patrick Hayes
  *

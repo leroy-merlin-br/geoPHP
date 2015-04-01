@@ -1,6 +1,14 @@
 <?php
 namespace GeoPHP\Adapter;
 
+use GeoPHP\GeoPHP;
+use DOMDocument;
+use InvalidText;
+use Exception;
+use GeoPHP\Geometry\Geometry;
+use GeoPHP\Geometry\Point;
+use GeoPHP\Geometry\LineString;
+
 /*
  * Copyright (c) Patrick Hayes
  *
@@ -84,7 +92,7 @@ class GPX extends GeoAdapter
             throw new Exception("Invalid / Empty GPX");
         }
 
-        return geoPHP::geometryReduce($geometries);
+        return GeoPHP::geometryReduce($geometries);
     }
 
     protected function childElements($xml, $nodename = '')

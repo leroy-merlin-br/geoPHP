@@ -1,6 +1,13 @@
 <?php
 namespace GeoPHP\Adapter;
 
+use DOMDOcument;
+use GeoPHP\GeoPHP;
+use GeoPHP\Geometry\Geometry;
+use GeoPHP\Geometry\Polygon;
+use GeoPHP\Geometry\Point;
+use GeoPHP\Geometry\LineString;
+
 /*
  * Copyright (c) Patrick Hayes
  *
@@ -83,7 +90,7 @@ class GeoRSS extends GeoAdapter
             throw new Exception("Invalid / Empty GeoRSS");
         }
 
-        return geoPHP::geometryReduce($geometries);
+        return GeoPHP::geometryReduce($geometries);
     }
 
     protected function getPointsFromCoords($string)

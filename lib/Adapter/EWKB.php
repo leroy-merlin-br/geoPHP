@@ -1,6 +1,8 @@
 <?php
 namespace GeoPHP\Adapter;
 
+use GeoPHP\Geometry\Geometry;
+
 /**
  * EWKB (Extended Well Known Binary) Adapter
  */
