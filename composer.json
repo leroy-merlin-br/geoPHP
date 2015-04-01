@@ -13,6 +13,11 @@
         }
     ],
     "require-dev": {
-        "phpunit/phpunit": "4.1.*"
+        "phpunit/phpunit": "~4.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "GeoPHP\\": "lib/"
+        }
     }
 }
