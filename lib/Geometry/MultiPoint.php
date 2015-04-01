@@ -6,18 +6,23 @@ namespace GeoPHP\Geometry;
  */
 class MultiPoint extends Collection
 {
-  protected $geom_type = 'MultiPoint';
+    protected $geom_type = 'MultiPoint';
 
-  public function numPoints() {
-    return $this->numGeometries();
-  }
+    public function numPoints()
+    {
+        return $this->numGeometries();
+    }
 
-  public function isSimple() {
-    return TRUE;
-  }
+    public function isSimple()
+    {
+        return true;
+    }
 
-  // Not valid for this geometry type
-  // --------------------------------
-  public function explode() { return NULL; }
+    // Not valid for this geometry type
+    // --------------------------------
+    public function explode()
+    {
+        return null;
+    }
 }
 
