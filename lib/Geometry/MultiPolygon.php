@@ -6,5 +6,5 @@ namespace GeoPHP\Geometry;
  */
 class MultiPolygon extends Collection
 {
-  protected $geom_type = 'MultiPolygon';
+    protected $geom_type = 'MultiPolygon';
 }
