@@ -5,6 +5,7 @@ use GeoPHP\GeoPHP;
 use DOMDocument;
 use InvalidText;
 use Exception;
+use GeoPHP\Geometry\Geometry;
 use GeoPHP\Geometry\Point;
 use GeoPHP\Geometry\LineString;
 

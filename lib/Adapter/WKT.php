@@ -1,7 +1,14 @@
 <?php
 namespace GeoPHP\Adapter;
 
+use Exception;
 use GeoPHP\GeoPHP;
+use GeoPHP\Geometry\Geometry;
+use GeoPHP\Geometry\Point;
+use GeoPHP\Geometry\Polygon;
+use GeoPHP\Geometry\MultiPolygon;
+use GeoPHP\Geometry\LineString;
+use GeoPHP\Geometry\GeometryCollection;
 
 /**
  * WKT (Well Known Text) Adapter

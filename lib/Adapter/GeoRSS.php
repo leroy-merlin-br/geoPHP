@@ -1,7 +1,12 @@
 <?php
 namespace GeoPHP\Adapter;
 
+use DOMDOcument;
 use GeoPHP\GeoPHP;
+use GeoPHP\Geometry\Geometry;
+use GeoPHP\Geometry\Polygon;
+use GeoPHP\Geometry\Point;
+use GeoPHP\Geometry\LineString;
 
 /*
  * Copyright (c) Patrick Hayes

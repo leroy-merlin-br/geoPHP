@@ -2,6 +2,7 @@
 namespace GeoPHP\Geometry;
 
 use GeoPHP\GeoPHP;
+use GeoPHP\Geometry\Point;
 
 /**
  * Polygon: A polygon is a plane figure that is bounded by a closed path,

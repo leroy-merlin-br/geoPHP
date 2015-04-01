@@ -2,6 +2,11 @@
 namespace GeoPHP\Adapter;
 
 use GeoPHP\GeoPHP;
+use GeoPHP\Geometry\Geometry;
+use GeoPHP\Geometry\Polygon;
+use GeoPHP\Geometry\Point;
+use GeoPHP\Geometry\LineString;
+use GeoPHP\Geometry\GeometryCollection;
 
 /**
  * GeoJSON class : a geojson reader/writer.

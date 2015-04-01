@@ -1,6 +1,8 @@
 <?php
 namespace GeoPHP\Adapter;
 
+use GeoPHP\Geometry\Geometry;
+
 /*
  * (c) Camptocamp <info@camptocamp.com>
  * (c) Patrick Hayes

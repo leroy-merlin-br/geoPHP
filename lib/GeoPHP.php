@@ -3,6 +3,7 @@ namespace GeoPHP;
 
 use GeoPHP\Adapter\GPX;
 use GeoPHP\Geometry\MultiLineString;
+use GeoPHP\Geometry\GeometryCollection;
 
 /**
  * (c) Patrick Hayes
