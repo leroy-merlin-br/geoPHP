@@ -1,6 +1,8 @@
 <?php
 namespace GeoPHP\Geometry;
 
+use GeoPHP\GeoPHP;
+
 /**
  * Geometry abstract class
  */
@@ -66,7 +68,7 @@ abstract class Geometry
         }
 
         if ($this->geos()) {
-            return geoPHP::geosToGeometry($this->geos()->envelope());
+            return GeoPHP::geosToGeometry($this->geos()->envelope());
         }
 
         $bbox = $this->getBBox();
@@ -96,7 +98,7 @@ abstract class Geometry
         $args = func_get_args();
 
         $format = array_shift($args);
-        $type_map = geoPHP::getAdapterMap();
+        $type_map = GeoPHP::getAdapterMap();
         $processor_type = $type_map[$format];
         $processor = new $processor_type();
 
@@ -159,11 +161,11 @@ abstract class Geometry
     public function geos()
     {
         // If it's already been set, just return it
-        if ($this->geos && geoPHP::geosInstalled()) {
+        if ($this->geos && GeoPHP::geosInstalled()) {
             return $this->geos;
         }
         // It hasn't been set yet, generate it
-        if (geoPHP::geosInstalled()) {
+        if (GeoPHP::geosInstalled()) {
             $reader = new GEOSWKBReader();
             $this->geos = $reader->readHEX($this->out('wkb', true));
         } else {
@@ -180,7 +182,7 @@ abstract class Geometry
     public function pointOnSurface()
     {
         if ($this->geos()) {
-            return geoPHP::geosToGeometry($this->geos()->pointOnSurface());
+            return GeoPHP::geosToGeometry($this->geos()->pointOnSurface());
         }
     }
 
@@ -212,35 +214,35 @@ abstract class Geometry
     public function buffer($distance)
     {
         if ($this->geos()) {
-            return geoPHP::geosToGeometry($this->geos()->buffer($distance));
+            return GeoPHP::geosToGeometry($this->geos()->buffer($distance));
         }
     }
 
     public function intersection(Geometry $geometry)
     {
         if ($this->geos()) {
-            return geoPHP::geosToGeometry($this->geos()->intersection($geometry->geos()));
+            return GeoPHP::geosToGeometry($this->geos()->intersection($geometry->geos()));
         }
     }
 
     public function convexHull()
     {
         if ($this->geos()) {
-            return geoPHP::geosToGeometry($this->geos()->convexHull());
+            return GeoPHP::geosToGeometry($this->geos()->convexHull());
         }
     }
 
     public function difference(Geometry $geometry)
     {
         if ($this->geos()) {
-            return geoPHP::geosToGeometry($this->geos()->difference($geometry->geos()));
+            return GeoPHP::geosToGeometry($this->geos()->difference($geometry->geos()));
         }
     }
 
     public function symDifference(Geometry $geometry)
     {
         if ($this->geos()) {
-            return geoPHP::geosToGeometry($this->geos()->symDifference($geometry->geos()));
+            return GeoPHP::geosToGeometry($this->geos()->symDifference($geometry->geos()));
         }
     }
 
@@ -253,9 +255,9 @@ abstract class Geometry
                 foreach ($geometry as $item) {
                     $geom = $geom->union($item->geos());
                 }
-                return geoPHP::geosToGeometry($geom);
+                return GeoPHP::geosToGeometry($geom);
             } else {
-                return geoPHP::geosToGeometry($this->geos()->union($geometry->geos()));
+                return GeoPHP::geosToGeometry($this->geos()->union($geometry->geos()));
             }
         }
     }
@@ -263,7 +265,7 @@ abstract class Geometry
     public function simplify($tolerance, $preserveTopology = false)
     {
         if ($this->geos()) {
-            return geoPHP::geosToGeometry($this->geos()->simplify($tolerance, $preserveTopology));
+            return GeoPHP::geosToGeometry($this->geos()->simplify($tolerance, $preserveTopology));
         }
     }
 

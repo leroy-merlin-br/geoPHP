@@ -1,6 +1,8 @@
 <?php
 namespace GeoPHP\Adapter;
 
+use GeoPHP\GeoPHP;
+
 /*
  * Copyright (c) Patrick Hayes
  *
@@ -83,7 +85,7 @@ class GeoRSS extends GeoAdapter
             throw new Exception("Invalid / Empty GeoRSS");
         }
 
-        return geoPHP::geometryReduce($geometries);
+        return GeoPHP::geometryReduce($geometries);
     }
 
     protected function getPointsFromCoords($string)

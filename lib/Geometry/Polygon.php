@@ -1,6 +1,8 @@
 <?php
 namespace GeoPHP\Geometry;
 
+use GeoPHP\GeoPHP;
+
 /**
  * Polygon: A polygon is a plane figure that is bounded by a closed path,
  * composed of a finite sequence of straight line segments
@@ -63,7 +65,7 @@ class Polygon extends Collection
         }
 
         if ($this->geos()) {
-            return geoPHP::geosToGeometry($this->geos()->centroid());
+            return GeoPHP::geosToGeometry($this->geos()->centroid());
         }
 
         $exterior_ring = $this->components[0];

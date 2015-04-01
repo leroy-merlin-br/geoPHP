@@ -1,6 +1,8 @@
 <?php
 namespace GeoPHP\Adapter;
 
+use GeoPHP\GeoPHP;
+
 /*
  * Copyright (c) Patrick Hayes
  * Copyright (c) 2010-2011, Arnaud Renevier
@@ -81,7 +83,7 @@ class KML extends GeoAdapter
     protected function geomFromXML()
     {
         $geometries = array();
-        $geom_types = geoPHP::geometryList();
+        $geom_types = GeoPHP::geometryList();
         $placemark_elements = $this->xmlobj->getElementsByTagName('placemark');
         if ($placemark_elements->length) {
             foreach ($placemark_elements as $placemark) {
@@ -102,7 +104,7 @@ class KML extends GeoAdapter
                 $geometries[] = $this->$function($this->xmlobj->documentElement);
             }
         }
-        return geoPHP::geometryReduce($geometries);
+        return GeoPHP::geometryReduce($geometries);
     }
 
     protected function childElements($xml, $nodename = '')
@@ -170,7 +172,7 @@ class KML extends GeoAdapter
     protected function parseGeometryCollection($xml)
     {
         $components = array();
-        $geom_types = geoPHP::geometryList();
+        $geom_types = GeoPHP::geometryList();
         foreach ($xml->childNodes as $child) {
             $nodeName = ($child->nodeName == 'linearring') ? 'linestring' : $child->nodeName;
             if (array_key_exists($nodeName, $geom_types)) {

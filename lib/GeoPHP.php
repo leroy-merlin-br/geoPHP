@@ -1,6 +1,9 @@
 <?php
 namespace GeoPHP;
 
+use GeoPHP\Adapter\GPX;
+use GeoPHP\Geometry\MultiLineString;
+
 /**
  * (c) Patrick Hayes
  *
@@ -21,7 +24,7 @@ class GeoPHP
         return '1.2';
     }
 
-    // geoPHP::load($data, $type, $other_args);
+    // GeoPHP::load($data, $type, $other_args);
     // if $data is an array, all passed in values will be combined into a single geometry
     public static function load()
     {
@@ -30,7 +33,7 @@ class GeoPHP
         $data = array_shift($args);
         $type = array_shift($args);
 
-        $type_map = geoPHP::getAdapterMap();
+        $type_map = GeoPHP::getAdapterMap();
 
         // Auto-detect type if needed
         if (!$type) {
@@ -41,7 +44,7 @@ class GeoPHP
                 }
             }
 
-            $detected = geoPHP::detectFormat($data);
+            $detected = GeoPHP::detectFormat($data);
             if (!$detected) {
                 return false;
             }
@@ -69,7 +72,7 @@ class GeoPHP
             foreach ($data as $item) {
                 $geoms[] = call_user_func_array(array($processor, "read"), array_merge(array($item), $args));
             }
-            $result = geoPHP::geometryReduce($geoms);
+            $result = GeoPHP::geometryReduce($geoms);
         }
 
         return $result;
@@ -78,17 +81,17 @@ class GeoPHP
     public static function getAdapterMap()
     {
         return array (
-            'wkt' =>  'WKT',
-            'ewkt' => 'EWKT',
-            'wkb' =>  'WKB',
-            'ewkb' => 'EWKB',
-            'json' => 'GeoJSON',
-            'geojson' => 'GeoJSON',
-            'kml' =>  'KML',
-            'gpx' =>  'GPX',
-            'georss' => 'GeoRSS',
-            'google_geocode' => 'GoogleGeocode',
-            'geohash' => 'GeoHash',
+            'wkt' =>  'GeoPHP\Adapter\WKT',
+            'ewkt' => 'GeoPHP\Adapter\EWKT',
+            'wkb' =>  'GeoPHP\Adapter\WKB',
+            'ewkb' => 'GeoPHP\Adapter\EWKB',
+            'json' => 'GeoPHP\Adapter\GeoJSON',
+            'geojson' => 'GeoPHP\Adapter\GeoJSON',
+            'kml' =>  'GeoPHP\Adapter\KML',
+            'gpx' =>  'GeoPHP\Adapter\GPX',
+            'georss' => 'GeoPHP\Adapter\GeoRSS',
+            'google_geocode' => 'GeoPHP\Adapter\GoogleGeocode',
+            'geohash' => 'GeoPHP\Adapter\GeoHash',
         );
     }
 
@@ -120,12 +123,12 @@ class GeoPHP
 
     public static function geosToGeometry($geos)
     {
-        if (!geoPHP::geosInstalled()) {
+        if (!GeoPHP::geosInstalled()) {
             return null;
         }
         $wkb_writer = new GEOSWKBWriter();
         $wkb = $wkb_writer->writeHEX($geos);
-        $geometry = geoPHP::load($wkb, 'wkb', true);
+        $geometry = GeoPHP::load($wkb, 'wkb', true);
         if ($geometry) {
             $geometry->setGeos($geos);
             return $geometry;
@@ -144,7 +147,7 @@ class GeoPHP
                 return false;
             }
             if (count($geometry) == 1) {
-                return geoPHP::geometryReduce(array_shift($geometry));
+                return GeoPHP::geometryReduce(array_shift($geometry));
             }
         }
 
@@ -204,7 +207,7 @@ class GeoPHP
             if (count($geometries) == 1) {
                 return $geometries[0];
             } else {
-                $class = 'Multi'.$geom_types[0];
+                $class = 'GeoPHP\Geometry\Multi'.$geom_types[0];
                 return new $class($geometries);
             }
         } else {
@@ -230,7 +233,7 @@ class GeoPHP
         // First char is a tab, space or carriage-return. trim it and try again
         if ($bytes[1] == 9 || $bytes[1] == 10 || $bytes[1] == 32) {
             $ltinput = ltrim($input);
-            return geoPHP::detectFormat($ltinput);
+            return GeoPHP::detectFormat($ltinput);
         }
 
         // Detect WKB or EWKB -- first byte is 1 (little endian indicator)
