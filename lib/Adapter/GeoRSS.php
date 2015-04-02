@@ -1,6 +1,7 @@
 <?php
 namespace GeoPHP\Adapter;
 
+use Exception;
 use DOMDOcument;
 use GeoPHP\GeoPHP;
 use GeoPHP\Geometry\Geometry;

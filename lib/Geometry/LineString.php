@@ -1,6 +1,8 @@
 <?php
 namespace GeoPHP\Geometry;
 
+use Exception;
+
 /**
  * LineString. A collection of Points representing a line.
  * A line can have more than one segment.

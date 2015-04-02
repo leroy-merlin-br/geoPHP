@@ -1,6 +1,7 @@
 <?php
 namespace GeoPHP\Geometry;
 
+use Exception;
 use GeoPHP\GeoPHP;
 
 /**
