@@ -199,7 +199,7 @@ class KML extends GeoAdapter
             foreach ($coord_sets as $set_string) {
                 $set_string = trim($set_string);
                 if ($set_string) {
-                    $set_array = explode(', ', $set_string);
+                    $set_array = explode(',', $set_string);
                     if (count($set_array) >= 2) {
                         $coordinates[] = $set_array;
                     }
