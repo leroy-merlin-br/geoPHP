@@ -2,6 +2,7 @@
 namespace GeoPHP\Geometry;
 
 use Exception;
+use GeoPHP\GeoPHP;
 
 /**
  * Point: The most basic geometry type. All other geometries
@@ -164,7 +165,7 @@ class Point extends Geometry
 
     public function equals($geometry)
     {
-        if (get_class($geometry) != 'Point') {
+        if (GeoPHP::getShortClassName($geometry) != 'Point') {
             return false;
         }
         if (!$this->isEmpty() && !$geometry->isEmpty()) {

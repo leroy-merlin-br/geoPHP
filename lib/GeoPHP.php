@@ -164,7 +164,7 @@ class GeoPHP
         // If it does, then pass the member, if not, then just pass back the geometry
         if (gettype($geometry) == 'object') {
             $simple_collections = array('MultiPoint','MultiLineString','MultiPolygon');
-            if (in_array(get_class($geometry), $passbacks)) {
+            if (in_array(self::getShortClassName($geometry), $passbacks)) {
                 $components = $geometry->getComponents();
                 if (count($components) == 1) {
                     return $components[0];
@@ -186,7 +186,7 @@ class GeoPHP
 
         foreach ($geometry as $item) {
             if ($item) {
-                if (in_array(get_class($item), $collections)) {
+                if (in_array(self::getShortClassName($item), $collections)) {
                     foreach ($item->getComponents() as $component) {
                         $geometries[] = $component;
                         $geom_types[] = $component->geometryType();
@@ -310,5 +310,24 @@ class GeoPHP
         // What do you get when you cross an elephant with a rhino?
         // http://youtu.be/RCBn5J83Poc
         return false;
+    }
+
+    /**
+     * Returns the short class name of the given object (without namespace)
+     *
+     * @param  Object|string $object
+     *
+     * @return string
+     */
+    public static function getShortClassName($object)
+    {
+        if (is_object($object)) {
+            $class = get_class($object);
+        } else {
+            $class = $object;
+        }
+
+        $path = explode('\\', $class);
+        return array_pop($path);
     }
 }
